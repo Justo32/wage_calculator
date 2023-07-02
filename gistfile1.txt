@@ -1,0 +1,125 @@
+EMPLOYEE_TYPE_FULL_TIME = 'full-time'
+EMPLOYEE_TYPE_PART_TIME = 'part-time'
+EMPLOYEE_HOLIDAY_BANK = 'bank-hol'
+EMPLOYEE_SLEEP = 'normal-sleep'
+EMPLOYEE_EXTRA_SLEEP = 'extra-sleep'
+EMPLOYEE_WAKE_NIGHT = 'wake-night'
+
+FULL_TIME_HOURS = 150
+FULL_TIME_HOURLY_RATE = 11.25
+FULL_TIME_OVERTIME_RATE = 13.75
+FULL_TIME_BANK_HOLIDAY_RATE = 23.5
+FULL_TIME_WAKING_NIGHT_RATE = 111.625
+FULL_TIME_SLEEP_RATE = 30
+FULL_TIME_EXTRA_SLEEP_RATE = 60
+
+PART_TIME_HOURS = 80
+PART_TIME_HOURLY_RATE = 11.75
+PART_TIME_OVERTIME_RATE = 13.75
+PART_TIME_BANK_HOLIDAY_RATE = 23.5
+PART_TIME_WAKING_NIGHT_RATE = 11.75
+PART_TIME_SLEEP_RATE = 30
+PART_TIME_WAKING_NIGHT_RATE = 111.625
+PART_TIME_EXTRA_SLEEP_RATE = 60
+
+employee_type = input("Enter your employee type (full-time or part-time?): ")
+
+regular_pay = 0
+overtime_pay = 0
+bh_pay = 0
+N_worked = 0
+sleeps_times = 0
+extra_sleep_times = 0
+wake_nights = 0
+
+
+if employee_type == EMPLOYEE_TYPE_FULL_TIME:
+    hours_worked = float(input("Enter the number of hours worked this month: "))
+
+    if hours_worked <= FULL_TIME_HOURS:
+        regular_pay = FULL_TIME_HOURLY_RATE * hours_worked
+
+    elif hours_worked > FULL_TIME_HOURS:
+        overtime_hours = hours_worked - FULL_TIME_HOURS
+        overtime_pay = FULL_TIME_OVERTIME_RATE * overtime_hours
+        regular_hours = hours_worked - overtime_hours
+        regular_pay = FULL_TIME_HOURLY_RATE * regular_hours+overtime_pay
+        N_worked = overtime_pay
+
+
+    employee_bank = input("Enter your holiday (bank-hol or no-bank-hol?): ").lower()
+
+    if employee_bank == EMPLOYEE_HOLIDAY_BANK:
+        holiday_hour = float(input("Enter the holiday-hour: "))
+        bh_pay = holiday_hour * FULL_TIME_BANK_HOLIDAY_RATE
+        regular_pay += bh_pay
+        
+
+    sleep = input("Did you do a normal-sleep or no-sleep?: ").lower()
+
+    if sleep == EMPLOYEE_SLEEP:
+        sleep_times = float(input("How many sleeps did you do?: "))
+        sleeps_times = sleep_times * FULL_TIME_SLEEP_RATE
+        regular_pay += sleeps_times
+
+    extra_sleep = input("Did you do an extra-sleep or no-extra-sleep?: ").lower()
+
+    if extra_sleep == EMPLOYEE_EXTRA_SLEEP:
+        extra_sleep_times = float(input("How many extra sleeps did you do?: "))
+        extra_sleep_times = extra_sleep_times * FULL_TIME_EXTRA_SLEEP_RATE
+        regular_pay += extra_sleep_times
+
+        
+    w_night = input("Do you have a wake-night or no-wake-night?: ").lower()
+
+    if w_night == EMPLOYEE_WAKE_NIGHT:
+        waking_night_times = float(input("How many waking nights?: "))
+        wake_nights = waking_night_times * FULL_TIME_WAKING_NIGHT_RATE
+        regular_pay += wake_nights
+if employee_type == EMPLOYEE_TYPE_PART_TIME:
+    hours_worked = float(input("Enter the number of hours worked this month: "))
+
+    if hours_worked <= PART_TIME_HOURS:
+        regular_pay = PART_TIME_HOURLY_RATE * hours_worked
+
+    elif hours_worked > PART_TIME_HOURS:
+        overtime_hours = hours_worked - PART_TIME_HOURS
+        overtime_pay = PART_TIME_OVERTIME_RATE * overtime_hours
+        regular_hours = hours_worked - overtime_hours
+        regular_pay = PART_TIME_HOURLY_RATE * regular_hours+overtime_pay
+        N_worked = overtime_pay
+
+
+    employee_bank = input("Enter your holiday (bank-hol or no-bank-hol?): ").lower()
+
+    if employee_bank == EMPLOYEE_HOLIDAY_BANK:
+        holiday_hour = float(input("Enter the holiday-hour: "))
+        bh_pay = holiday_hour * PART_TIME_BANK_HOLIDAY_RATE
+        regular_pay += bh_pay
+
+    sleep = input("Did you do a normal-sleep or no-sleep?: ").lower()
+
+    if sleep == EMPLOYEE_SLEEP:
+        sleep_times = float(input("How many sleeps did you do?: "))
+        sleeps_times = sleep_times * PART_TIME_SLEEP_RATE
+        regular_pay += sleeps_times
+   
+
+
+    extra_sleep = input("Did you do an extra-sleep or no-extra-sleep?: ").lower()
+
+    if extra_sleep == EMPLOYEE_EXTRA_SLEEP:
+        extra_sleep_times = float(input("How many extra sleeps did you do?: "))
+        extra_sleep_times = extra_sleep_times * PART_TIME_EXTRA_SLEEP_RATE
+        regular_pay += extra_sleep_times
+
+    w_night = input("Do you have a wake-night or no-wake-night?: ").lower()
+
+    if w_night == EMPLOYEE_WAKE_NIGHT:
+        waking_night_times = float(input("How many waking nights?: "))
+        wake_nights = waking_night_times * FULL_TIME_WAKING_NIGHT_RATE
+        regular_pay += wake_nights
+
+         
+print(f"YOUR TOTAL WAGE FOR THIS MONTH is: {regular_pay}")
+
